@@ -7,9 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
-        <TextBlock FontSize="130" HorizontalAlignment="Left"  Text="Stewardess" TextWrapping="Wrap" VerticalAlignment="Top" Height="374" Width="985"/>
-
-    </Grid>
+    <SemanticZoom>
+        <SemanticZoom.ZoomedInView>
+            <GridView>
+                <TextBlock FontSize="130" HorizontalAlignment="Left"  Text="Stewardess" TextWrapping="Wrap" VerticalAlignment="Top" Height="374" Width="985"/>
+            </GridView>
+        </SemanticZoom.ZoomedInView>
+    </SemanticZoom>
 </Page>

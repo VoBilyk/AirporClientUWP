@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot>
+        <Pivot Padding="0,0,10,10">
             <PivotItem Header="Flights">
                 <Frame x:Name="FlightsFrame"></Frame>
             </PivotItem>

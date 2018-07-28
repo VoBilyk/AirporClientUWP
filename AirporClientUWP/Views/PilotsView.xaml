@@ -14,7 +14,8 @@
             <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" ItemsSource="{x:Bind pilots}">
+        <Rectangle Fill="DarkSlateGray" Opacity="0.1"  Grid.Column="0"/>
+        <ListView Grid.Column="0" ItemsSource="{x:Bind pilots}" SelectedItem="{x:Bind _selectedPilot, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Pilot">
                     <Grid Margin="16">
@@ -24,37 +25,124 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal"
-                                        Grid.Row="0">
+                                    Grid.Row="0">
                             <TextBlock Text="{x:Bind FirstName}"
-                                        Foreground="Black"
-                                        FontSize="16"
-                                        Padding="20,0,0,0"
-                                        Grid.Row="0"/>
+                                       FontSize="20"
+                                       Padding="10,0,0,0"
+                                       Grid.Row="0"/>
                             <TextBlock Text="{x:Bind LastName}"
-                                        Foreground="Black"
-                                        FontSize="16"
-                                        Padding="5,0,0,0"
-                                        Grid.Row="0"/>
+                                       FontSize="20"
+                                       Padding="5,0,0,0"
+                                       Grid.Row="0"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
                                         Grid.Row="1">
                             <TextBlock Text="{x:Bind BirthDate.ToShortDateString()}"
-                                            Foreground="#444444"
-                                            FontSize="13"
-                                            Padding="20,0,0,0"/>
+                                       Foreground="#444444"
+                                       FontSize="13"
+                                       Width="110"
+                                       Padding="10,5,0,0"/>
                             <TextBlock Text="Experience:"
-                                            Foreground="#888888"
-                                            FontSize="13"
-                                            Padding="20,0,0,0"/>
+                                       Foreground="#888888"
+                                       FontSize="13"
+                                       Padding="20,5,0,0"/>
                             <TextBlock Text="{x:Bind Experience}"
-                                            Foreground="#444444"
-                                            FontSize="13"
-                                            Padding="6,0,0,0"/>
+                                       Foreground="#444444"
+                                       FontSize="13"
+                                       Padding="6,5,0,0"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Rectangle Fill="Gray" Opacity="0.1"  Grid.Column="1"/>
+        <Grid Grid.Column="1"
+              Margin="10, 20, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Pilot Information"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       FontSize="30"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="ID:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBlock Text="{x:Bind _selectedPilot.Id}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Padding=" 0,10"/>
+            
+            <TextBlock Text="FirstName:"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBox Text="{x:Bind _selectedPilot.FirstName}"
+                     Height="35"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     FontSize="20"/>
+
+            <TextBlock Text="LastName:"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBox Text="{x:Bind _selectedPilot.LastName}"
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     Height="35"
+                     FontSize="20"/>
+
+            <TextBlock Text="Experience:"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBox Text="{x:Bind _selectedPilot.Experience}"
+                     Grid.Row="4"
+                     Grid.Column="1"
+                     Height="35"
+                     FontSize="20"/>
+
+            <TextBlock Text="BirthDate:"
+                       Grid.Row="5"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <DatePicker Date="{x:Bind _selectedPilot.BirthDate}"
+                     Grid.Row="5"
+                     Grid.Column="1"
+                     Height="35"
+                     FontSize="17"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
+                <Button Width="80" Margin="5, 0">Create</Button>
+                <Button Width="80" Margin="5, 0">Update</Button>
+                <Button Width="80" Margin="5, 0">Delete</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
