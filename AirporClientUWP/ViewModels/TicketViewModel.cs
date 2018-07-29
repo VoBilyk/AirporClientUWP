@@ -26,7 +26,7 @@ namespace AirporClientUWP.ViewModels
             DeleteCommand = new RelayCommand(DeleteTicket);
         }
 
-        private async Task DownloadData()
+        private async void DownloadData()
         {
             try
             {

@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="AirporClientUWP.Views.MainPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AirporClientUWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <NavigationView Grid.Row="1" SelectionChanged="SelectionChanged"
+                    IsSettingsVisible="False"
+                    IsBackButtonVisible="Collapsed">
+        
+        <NavigationView.MenuItems>
+            <NavigationViewItem Icon="Play" Content="Aeroplanes" Tag="Aeroplanes" />
+            <NavigationViewItem Content="AeroplaneTypes" Tag="AeroplaneTypes" />
+            <NavigationViewItemSeparator/>
+            <NavigationViewItem Icon="Play" Content="Departures" Tag="Departures" />
+            <NavigationViewItem Icon="Play" Content="Flights" Tag="Flights" />
+            <NavigationViewItem Icon="Play" Content="Tickets" Tag="Tickets" />
+            <NavigationViewItemSeparator/>
+            <NavigationViewItem Icon="Play" Content="Pilots" Tag="Pilots" />
+            <NavigationViewItem Icon="Play" Content="Stewardesses" Tag="Stewardesses" />
+            <NavigationViewItem Icon="Play" Content="Crews" Tag="Crews" />
+        </NavigationView.MenuItems>
+        <Frame x:Name="contentFrame">
+        </Frame>
+    </NavigationView>
+</Page>
