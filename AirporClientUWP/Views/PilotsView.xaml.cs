@@ -18,22 +18,6 @@ namespace AirporClientUWP.Views
         public PilotsView()
         {
             this.InitializeComponent();
-            //_service = new PilotService();
-            //pilots = _service.GetAllAsync().Result;
-            //_selectedPilot = pilots[1];
         }
-
-        //public async Task<ObservableCollection<Pilot>> GetPilots()
-        //{
-        //    var service = new PilotService();
-        //    pilots = await service.GetAllAsync();
-        //    return pilots;
-        //}
-
-        //private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    var list = (ListView)sender;
-        //    _selectedPilot = (Pilot)list.SelectedValue;
-        //}
     }
 }

@@ -36,8 +36,8 @@ namespace AirporClientUWP.Views
         {
             this.InitializeComponent();
             _service = new StewardessService();
-            stewardesses = _service.GetAllAsync().Result;
-            _selectedItem = stewardesses[1];
+            //stewardesses = _service.GetAllAsync().Result;
+            //_selectedItem = stewardesses[1];
         }
 
         public async Task<ObservableCollection<Stewardess>> GetPilots()

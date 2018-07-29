@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+
 using AirporClientUWP.Models;
 using AirporClientUWP.Services;
 
@@ -19,14 +19,19 @@ namespace AirporClientUWP.ViewModels
         public PilotViewModel()
         {
             _service = new PilotService();
+            DownloadData();
 
             AddCommand = new RelayCommand(AddPilot);
-            Pilots = _service.GetAllAsync().Result;
-
-            //search();
+            UpdateCommand = new RelayCommand(UpdatePilot);
+            DeleteCommand = new RelayCommand(DeletePilot);
         }
 
-        
+        private async Task DownloadData()
+        {
+            Pilots = await _service.GetAllAsync();
+        }
+
+
         public Pilot SelectedPilot
         {
             get { return _selectedPilot; }
@@ -39,32 +44,27 @@ namespace AirporClientUWP.ViewModels
 
         public ICommand AddCommand { get; set; }
 
-        private void AddPilot()
+        private async void AddPilot()
         {
-            var pilot = this.SelectedPilot;
+            var result = await _service.AddAsync(SelectedPilot);
+            Pilots.Insert(0, result);
         }
 
-        //private void search()
-        //{
-        //    Students.Clear();
-        //    if (string.IsNullOrWhiteSpace(SearchFilter))
-        //    {
-        //        foreach (var student in _academy.GetAllStudents())
-        //        {
-        //            Students.Add(student);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (var student in _academy.GetByStudentName(SearchFilter))
-        //        {
-        //            Students.Add(student);
-        //        }
-        //        foreach (var student in _academy.GetByStudentCity(SearchFilter))
-        //        {
-        //            Students.Add(student);
-        //        }
-        //    }
-        //}
+        public ICommand UpdateCommand { get; set; }
+
+        private async void UpdatePilot()
+        {
+            var resultItem = await _service.UpdateAsync(SelectedPilot);
+            Pilots.Remove(SelectedPilot);
+            Pilots.Insert(0, resultItem);
+        }
+
+        public ICommand DeleteCommand { get; set; }
+
+        private async void DeletePilot()
+        {
+            await _service.DeleteAsync(SelectedPilot.Id);
+            Pilots.Remove(SelectedPilot);
+        }
     }
 }

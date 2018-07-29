@@ -9,73 +9,73 @@ using System.Text;
 
 namespace AirporClientUWP.Services
 {
-    public class PilotService
+    public class DepartureService
     {
         const string SERVER_NAME = "http://localhost:57338";
 
-        public async Task<ObservableCollection<Pilot>> GetAllAsync()
+        public async Task<ObservableCollection<Departure>> GetAllAsync()
         {
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(SERVER_NAME + "/api/pilots").ConfigureAwait(false);
+                var response = await httpClient.GetAsync(SERVER_NAME + "/api/Departures").ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string contentResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<ObservableCollection<Pilot>>(contentResponse);
+                    return JsonConvert.DeserializeObject<ObservableCollection<Departure>>(contentResponse);
                 }
             }
 
             throw new InvalidOperationException("Can`t get items from server");
         }
 
-        public async Task<Pilot> GetAsync(Guid id)
+        public async Task<Departure> GetAsync(Guid id)
         {
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(SERVER_NAME + $"/api/pilots/{id}").ConfigureAwait(false);
+                var response = await httpClient.GetAsync(SERVER_NAME + $"/api/Departures/{id}").ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string contentResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Pilot>(contentResponse);
+                    return JsonConvert.DeserializeObject<Departure>(contentResponse);
                 }
             }
 
             throw new InvalidOperationException("Can`t get item from server");
         }
 
-        public async Task<Pilot> AddAsync(Pilot pilot)
+        public async Task<Departure> AddAsync(Departure Departure)
         {
-            var jsonBody = JsonConvert.SerializeObject(pilot);
+            var jsonBody = JsonConvert.SerializeObject(Departure);
             var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.PostAsync(SERVER_NAME + $"/api/pilots/", content).ConfigureAwait(false);
+                var response = await httpClient.PostAsync(SERVER_NAME + $"/api/Departures/", content).ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string contentResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Pilot>(contentResponse);
+                    return JsonConvert.DeserializeObject<Departure>(contentResponse);
                 }
             }
 
             throw new InvalidOperationException("Can`t add items to server");
         }
 
-        public async Task<Pilot> UpdateAsync(Pilot pilot)
+        public async Task<Departure> UpdateAsync(Departure Departure)
         {
-            var jsonBody = JsonConvert.SerializeObject(pilot);
+            var jsonBody = JsonConvert.SerializeObject(Departure);
             var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.PutAsync(SERVER_NAME + $"/api/pilots/{pilot.Id}", content).ConfigureAwait(false);
+                var response = await httpClient.PutAsync(SERVER_NAME + $"/api/Departures/{Departure.Id}", content).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     string contentResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Pilot>(contentResponse);
+                    return JsonConvert.DeserializeObject<Departure>(contentResponse);
                 }
             }
 
@@ -86,7 +86,7 @@ namespace AirporClientUWP.Services
         {
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.DeleteAsync(SERVER_NAME + $"/api/pilots/{id}").ConfigureAwait(false);
+                var response = await httpClient.DeleteAsync(SERVER_NAME + $"/api/Departures/{id}").ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
                 {

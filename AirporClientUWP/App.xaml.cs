@@ -30,6 +30,12 @@ namespace AirporClientUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            App.Current.UnhandledException += OnUnhandledException;
+        }
+
+
+        private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
         }
 
         /// <summary>
