@@ -13,20 +13,31 @@ namespace AirporClientUWP.ViewModels
     {
         private TicketService _service;
         private Ticket _selectedTicket;
+        private ObservableCollection<Ticket> _Tickets;
 
-        public ObservableCollection<Ticket> Tickets { get; private set; }
 
         public TicketViewModel()
         {
             _service = new TicketService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddTicket);
             UpdateCommand = new RelayCommand(UpdateTicket);
             DeleteCommand = new RelayCommand(DeleteTicket);
+
+            DownloadData();
         }
 
-        private async void DownloadData()
+        public ObservableCollection<Ticket> Tickets
+        {
+            get { return _Tickets; }
+            set
+            {
+                _Tickets = value;
+                RaisePropertyChanged(() => Tickets);
+            }
+        }
+
+        private async Task DownloadData()
         {
             try
             {

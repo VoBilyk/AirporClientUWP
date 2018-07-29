@@ -20,11 +20,11 @@ namespace AirporClientUWP.ViewModels
         {
             _service = new StewardessService();
 
-            DownloadData();
-
             AddCommand = new RelayCommand(AddStewardess);
             UpdateCommand = new RelayCommand(UpdateStewardess);
             DeleteCommand = new RelayCommand(DeleteStewardess);
+
+            DownloadData();
         }
 
         public ObservableCollection<Stewardess> Stewardesses

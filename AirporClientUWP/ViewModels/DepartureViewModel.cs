@@ -13,17 +13,28 @@ namespace AirporClientUWP.ViewModels
     {
         private DepartureService _service;
         private Departure _selectedDeparture;
+        private ObservableCollection<Departure> _Departures;
 
-        public ObservableCollection<Departure> Departures { get; private set; }
 
         public DepartureViewModel()
         {
             _service = new DepartureService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddDeparture);
             UpdateCommand = new RelayCommand(UpdateDeparture);
             DeleteCommand = new RelayCommand(DeleteDeparture);
+
+            DownloadData();
+        }
+
+        public ObservableCollection<Departure> Departures
+        {
+            get { return _Departures; }
+            set
+            {
+                _Departures = value;
+                RaisePropertyChanged(() => Departures);
+            }
         }
 
         private async Task DownloadData()

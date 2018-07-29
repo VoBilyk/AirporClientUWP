@@ -13,17 +13,28 @@ namespace AirporClientUWP.ViewModels
     {
         private AeroplaneService _service;
         private Aeroplane _selectedAeroplane;
+        private ObservableCollection<Aeroplane> _Aeroplanes;
 
-        public ObservableCollection<Aeroplane> Aeroplanes { get; private set; }
 
         public AeroplaneViewModel()
         {
             _service = new AeroplaneService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddAeroplane);
             UpdateCommand = new RelayCommand(UpdateAeroplane);
             DeleteCommand = new RelayCommand(DeleteAeroplane);
+
+            DownloadData();
+        }
+
+        public ObservableCollection<Aeroplane> Aeroplanes
+        {
+            get { return _Aeroplanes; }
+            set
+            {
+                _Aeroplanes = value;
+                RaisePropertyChanged(() => Aeroplanes);
+            }
         }
 
         private async Task DownloadData()
