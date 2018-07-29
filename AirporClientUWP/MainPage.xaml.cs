@@ -14,6 +14,11 @@ namespace AirporClientUWP
 
             StewardessesFrame.Navigate(typeof(StewardessView));
             PilotsFrame.Navigate(typeof(PilotsView));
+            FlightsFrame.Navigate(typeof(FlightsView));
+            TicketsFrame.Navigate(typeof(TicketView));
+            AeroplanesTypeFrame.Navigate(typeof(AeroplaneTypeView));
+            AeroplanesFrame.Navigate(typeof(AeroplaneView));
+            DeparturesFrame.Navigate(typeof(DepartureView));
         }
     }
 }

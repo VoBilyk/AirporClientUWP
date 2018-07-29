@@ -125,11 +125,26 @@
     <Compile Include="ViewModels\PilotViewModel.cs" />
     <Compile Include="ViewModels\StewardessViewModel.cs" />
     <Compile Include="ViewModels\TicketViewModel.cs" />
+    <Compile Include="Views\AeroplaneTypeView.xaml.cs">
+      <DependentUpon>AeroplaneTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AeroplaneView.xaml.cs">
+      <DependentUpon>AeroplaneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartureView.xaml.cs">
+      <DependentUpon>DepartureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightsView.xaml.cs">
+      <DependentUpon>FlightsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PilotsView.xaml.cs">
       <DependentUpon>PilotsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StewardessView.xaml.cs">
       <DependentUpon>StewardessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TicketView.xaml.cs">
+      <DependentUpon>TicketView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -157,11 +172,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AeroplaneTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AeroplaneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DepartureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PilotsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StewardessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TicketView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
