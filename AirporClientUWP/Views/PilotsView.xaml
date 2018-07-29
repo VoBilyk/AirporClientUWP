@@ -9,15 +9,56 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding PilotVMInstance, Source={StaticResource Locator}}">
-    
+
     <Grid x:Name="MainGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainGrid.RowDefinitions[1].Height" Value="auto"/>
+                        <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="*"/>
+                        <Setter Target="MainGrid.ColumnDefinitions[0].Width" Value="280"/>
+                        <Setter Target="ListItem.Margin" Value="0 0 6 0"/>
+                        <Setter Target="DetailItem.Margin" Value="6 0 0 0"/>
+                        <Setter Target="DetailItem.(Grid.Column)" Value="1"/>
+                        <Setter Target="DetailItem.(Grid.Row)" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ListItem.Margin" Value="0 0 0 6"/>
+                        <Setter Target="DetailItem.Margin" Value="0 6 0 0"/>
+                        <Setter Target="MainGrid.RowDefinitions[0].Height" Value="*"/>
+                        <Setter Target="MainGrid.RowDefinitions[1].Height" Value="auto"/>
+                        <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="auto"/>
+                        <Setter Target="DetailItem.(Grid.Column)" Value="0"/>
+                        <Setter Target="DetailItem.(Grid.Row)" Value="1"/>
+                        <Setter Target="DetailItem.HorizontalAlignment" Value="Center"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="DarkSlateGray" Opacity="0.1"  Grid.Column="0"/>
-        <ListView Grid.Column="0" x:Name="ItemList" ItemsSource="{Binding Pilots}" SelectedItem="{Binding SelectedPilot, Mode=TwoWay}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="ListItem" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Pilots}" SelectedItem="{Binding SelectedPilot, Mode=TwoWay}">
+            <ListView.Background>
+                <SolidColorBrush Color="DarkSlateGray" Opacity="0.1" />
+            </ListView.Background>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Pilot">
                     <Grid Margin="16">
@@ -59,8 +100,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Rectangle Fill="Gray" Opacity="0.1"  Grid.Column="1"/>
-        <Grid x:Name="ItemDetail" Grid.Column="1" Margin="10, 20, 0, 0">
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -75,74 +115,48 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Pilot Information"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"
-                       FontSize="30"
-                       HorizontalAlignment="Center"/>
+                       Style="{StaticResource TableTitle}"
+                       Grid.Row="0" Grid.ColumnSpan="2"/>
+
             <TextBlock Text="ID:"
-                       Grid.Row="1"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
+                       Style="{StaticResource DataTitle}"
+                       Grid.Row="1" Grid.Column="0"/>
             <TextBlock Text="{Binding SelectedPilot.Id, Mode=OneWay}"
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       FontSize="17"
-                       Padding=" 0,10"/>
+                       Style="{StaticResource Id}"
+                       Grid.Row="1" Grid.Column="1"/>
 
-            <TextBlock Text="FirstName:"
-                       Grid.Row="2"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <TextBox Text="{Binding SelectedPilot.FirstName, Mode=TwoWay}"
-                     Height="35"
-                     Grid.Row="2"
-                     Grid.Column="1"
-                     FontSize="17"/>
+            <TextBlock Style="{StaticResource DataTitle}" 
+                       Text="FirstName:"
+                       Grid.Row="2" Grid.Column="0"/>
+            <TextBox Style="{StaticResource TwoWayInput}" 
+                     Text="{Binding SelectedPilot.FirstName, Mode=TwoWay}"
+                     Grid.Row="2" Grid.Column="1"/>
 
-            <TextBlock Text="LastName:"
-                       Grid.Row="3"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <TextBox Text="{Binding SelectedPilot.LastName, Mode=TwoWay}"
-                     Grid.Row="3"
-                     Grid.Column="1"
-                     Height="35"
-                     FontSize="17"/>
+            <TextBlock Text="LastName:" 
+                       Style="{StaticResource DataTitle}"
+                       Grid.Row="3" Grid.Column="0"/>
+            <TextBox Style="{StaticResource TwoWayInput}" 
+                     Text="{Binding SelectedPilot.LastName, Mode=TwoWay}"
+                     Grid.Row="3" Grid.Column="1"/>
 
-            <TextBlock Text="Experience:"
-                       Grid.Row="4"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <TextBox Text="{Binding SelectedPilot.Experience, Mode=TwoWay}"
-                     Grid.Row="4"
-                     Grid.Column="1"
-                     Height="35"
-                     FontSize="17"/>
+            <TextBlock Text="Experience:" 
+                       Style="{StaticResource DataTitle}"
+                       Grid.Row="4" Grid.Column="0"/>
+            <TextBox Style="{StaticResource TwoWayInput}"
+                     Text="{Binding SelectedPilot.Experience, Mode=TwoWay}"
+                     Grid.Row="4" Grid.Column="1"/>
 
-            <TextBlock Text="BirthDate:"
-                       Grid.Row="5"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
+            <TextBlock Text="BirthDate:" Style="{StaticResource DataTitle}"
+                       Grid.Row="5" Grid.Column="0"/>
+
             <DatePicker Date="{Binding SelectedPilot.BirthDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}"
-                     Grid.Row="5"
-                     Grid.Column="1"
-                     Height="35"
-                     FontSize="17"/>
+                        Style="{StaticResource InputDateTwoWay}"
+                        Grid.Row="5" Grid.Column="1"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
-                <Button Width="80" Margin="5, 0" Content="Create" Command="{Binding AddCommand}"/>
-                <Button Width="80" Margin="5, 0" Content="Update" Command="{Binding UpdateCommand}"/>
-                <Button Width="80" Margin="5, 0" Content="Delete" Command="{Binding DeleteCommand}"/>
+                <Button Style="{StaticResource ButtonCommand}" Content="Create" Command="{Binding AddCommand}"/>
+                <Button Style="{StaticResource ButtonCommand}" Content="Update" Command="{Binding UpdateCommand}"/>
+                <Button Style="{StaticResource ButtonCommand}" Content="Delete" Command="{Binding DeleteCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>

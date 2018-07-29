@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding StewardessVMInstance, Source={StaticResource Locator}}">
 
     <Grid x:Name="MainGrid">
         <VisualStateManager.VisualStateGroups>
@@ -54,7 +55,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ListItem" Grid.Column="0" Grid.Row="0" ItemsSource="{x:Bind stewardesses}" SelectionChanged="ItemList_SelectionChanged">
+        <ListView x:Name="ListItem" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Stewardesses}" SelectedItem="{Binding SelectedStewardess, Mode=TwoWay}">
             <ListView.Background>
                 <SolidColorBrush Color="DarkSlateGray" Opacity="0.1" />
             </ListView.Background>
@@ -83,6 +84,7 @@
                             <TextBlock Text="{x:Bind BirthDate.ToShortDateString()}"
                                        Foreground="#444444"
                                        FontSize="13"
+                                       Width="110"
                                        Padding="10,5,0,0"/>
                         </StackPanel>
                     </Grid>
@@ -102,65 +104,43 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Stewardess information"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"
-                       FontSize="30"
-                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Stewardess Information"
+                       Style="{StaticResource TableTitle}"
+                       Grid.Row="0" Grid.ColumnSpan="2"/>
+
             <TextBlock Text="ID:"
-                       Grid.Row="1"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <TextBlock Text="{x:Bind _selectedItem.Id, Mode=OneTime}"
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Padding=" 0,10"/>
+                       Style="{StaticResource DataTitle}"
+                       Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="{Binding SelectedStewardess.Id, Mode=OneWay}"
+                       Style="{StaticResource Id}"
+                       Grid.Row="1" Grid.Column="1"/>
 
-            <TextBlock Text="FirstName:"
-                       Grid.Row="2"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedItem.FirstName, Mode=TwoWay}"
-                     Height="35"
-                     Grid.Row="2"
-                     Grid.Column="1"
-                     FontSize="20"/>
+            <TextBlock Style="{StaticResource DataTitle}" 
+                       Text="FirstName:"
+                       Grid.Row="2" Grid.Column="0"/>
+            <TextBox Style="{StaticResource TwoWayInput}" 
+                     Text="{Binding SelectedStewardess.FirstName, Mode=TwoWay}"
+                     Grid.Row="2" Grid.Column="1"/>
 
-            <TextBlock Text="LastName:"
-                       Grid.Row="3"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedItem.LastName, Mode=TwoWay}"
-                     Grid.Row="3"
-                     Grid.Column="1"
-                     Height="35"
-                     FontSize="20"/>
+            <TextBlock Text="LastName:" 
+                       Style="{StaticResource DataTitle}"
+                       Grid.Row="3" Grid.Column="0"/>
+            <TextBox Style="{StaticResource TwoWayInput}" 
+                     Text="{Binding SelectedStewardess.LastName, Mode=TwoWay}"
+                     Grid.Row="3" Grid.Column="1"/>
 
-            <TextBlock Text="BirthDate:"
-                       Grid.Row="4"
-                       Grid.Column="0"
-                       FontSize="20"
-                       Padding="10"
-                       HorizontalAlignment="Right"/>
-            <DatePicker Date="{x:Bind _selectedItem.BirthDate}"
-                     Grid.Row="4"
-                     Grid.Column="1"
-                     Height="35"
-                     FontSize="17"/>
+            <TextBlock Text="BirthDate:" Style="{StaticResource DataTitle}"
+                       Grid.Row="4" Grid.Column="0"/>
+
+            <DatePicker Date="{Binding SelectedStewardess.BirthDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}"
+                        Style="{StaticResource InputDateTwoWay}"
+                        Grid.Row="4" Grid.Column="1"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
-                <Button Width="80" Margin="5, 0">Create</Button>
-                <Button Width="80" Margin="5, 0">Update</Button>
-                <Button Width="80" Margin="5, 0">Delete</Button>
+                <Button Style="{StaticResource ButtonCommand}" Content="Create" Command="{Binding AddCommand}"/>
+                <Button Style="{StaticResource ButtonCommand}" Content="Update" Command="{Binding UpdateCommand}"/>
+                <Button Style="{StaticResource ButtonCommand}" Content="Delete" Command="{Binding DeleteCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>
