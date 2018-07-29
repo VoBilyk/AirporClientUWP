@@ -98,8 +98,14 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Aeroplane.cs" />
+    <Compile Include="Models\AeroplaneType.cs" />
+    <Compile Include="Models\Crew.cs" />
+    <Compile Include="Models\Departure.cs" />
+    <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Pilot.cs" />
     <Compile Include="Models\Stewardess.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AeroplaneService.cs" />
     <Compile Include="Services\AeroplaneTypeService.cs" />
