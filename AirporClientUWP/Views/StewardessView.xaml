@@ -3,15 +3,165 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AirporClientUWP.Views"
+    xmlns:m="using:AirporClientUWP.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <SemanticZoom>
-        <SemanticZoom.ZoomedInView>
-            <GridView>
-                <TextBlock FontSize="130" HorizontalAlignment="Left"  Text="Stewardess" TextWrapping="Wrap" VerticalAlignment="Top" Height="374" Width="985"/>
-            </GridView>
-        </SemanticZoom.ZoomedInView>
-    </SemanticZoom>
+
+    <Grid x:Name="MainGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainGrid.RowDefinitions[1].Height" Value="auto"/>
+                        <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="*"/>
+                        <Setter Target="MainGrid.ColumnDefinitions[0].Width" Value="280"/>
+                        <Setter Target="ListItem.Margin" Value="0 0 6 0"/>
+                        <Setter Target="DetailItem.Margin" Value="6 0 0 0"/>
+                        <Setter Target="DetailItem.(Grid.Column)" Value="1"/>
+                        <Setter Target="DetailItem.(Grid.Row)" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ListItem.Margin" Value="0 0 0 6"/>
+                        <Setter Target="DetailItem.Margin" Value="0 6 0 0"/>
+                        <Setter Target="MainGrid.RowDefinitions[0].Height" Value="*"/>
+                        <Setter Target="MainGrid.RowDefinitions[1].Height" Value="auto"/>
+                        <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="auto"/>
+                        <Setter Target="DetailItem.(Grid.Column)" Value="0"/>
+                        <Setter Target="DetailItem.(Grid.Row)" Value="1"/>
+                        <Setter Target="DetailItem.HorizontalAlignment" Value="Center"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="ListItem" Grid.Column="0" Grid.Row="0" ItemsSource="{x:Bind stewardesses}" SelectionChanged="ItemList_SelectionChanged">
+            <ListView.Background>
+                <SolidColorBrush Color="DarkSlateGray" Opacity="0.1" />
+            </ListView.Background>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="m:Stewardess">
+                    <Grid Margin="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="0">
+                            <TextBlock Text="{x:Bind FirstName}"
+                                       FontSize="20"
+                                       Padding="10,0,0,0"
+                                       Grid.Row="0"/>
+                            <TextBlock Text="{x:Bind LastName}"
+                                       FontSize="20"
+                                       Padding="5,0,0,0"
+                                       Grid.Row="0"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                        Grid.Row="1">
+                            <TextBlock Text="{x:Bind BirthDate.ToShortDateString()}"
+                                       Foreground="#444444"
+                                       FontSize="13"
+                                       Padding="10,5,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Stewardess information"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       FontSize="30"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="ID:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBlock Text="{x:Bind _selectedItem.Id, Mode=OneTime}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Padding=" 0,10"/>
+
+            <TextBlock Text="FirstName:"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBox Text="{x:Bind _selectedItem.FirstName, Mode=TwoWay}"
+                     Height="35"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     FontSize="20"/>
+
+            <TextBlock Text="LastName:"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <TextBox Text="{x:Bind _selectedItem.LastName, Mode=TwoWay}"
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     Height="35"
+                     FontSize="20"/>
+
+            <TextBlock Text="BirthDate:"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Padding="10"
+                       HorizontalAlignment="Right"/>
+            <DatePicker Date="{x:Bind _selectedItem.BirthDate}"
+                     Grid.Row="4"
+                     Grid.Column="1"
+                     Height="35"
+                     FontSize="17"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
+                <Button Width="80" Margin="5, 0">Create</Button>
+                <Button Width="80" Margin="5, 0">Update</Button>
+                <Button Width="80" Margin="5, 0">Delete</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Page>

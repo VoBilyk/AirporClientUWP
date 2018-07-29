@@ -29,5 +29,11 @@ namespace AirporClientUWP.Views
             pilots = await service.GetAllAsync();
             return pilots;
         }
+
+        private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var list = (ListView)sender;
+            _selectedPilot = (Pilot)list.SelectedValue;
+        }
     }
 }

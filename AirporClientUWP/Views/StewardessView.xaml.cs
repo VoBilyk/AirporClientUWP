@@ -1,8 +1,12 @@
-﻿using System;
+﻿using AirporClientUWP.Models;
+using AirporClientUWP.Services;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +26,30 @@ namespace AirporClientUWP.Views
     /// </summary>
     public sealed partial class StewardessView : Page
     {
+
+        private StewardessService _service;
+
+        private Stewardess _selectedItem;
+        public ObservableCollection<Stewardess> stewardesses;
+
         public StewardessView()
         {
             this.InitializeComponent();
+            _service = new StewardessService();
+            stewardesses = _service.GetAllAsync().Result;
+            _selectedItem = stewardesses[1];
+        }
+
+        public async Task<ObservableCollection<Stewardess>> GetPilots()
+        {
+            stewardesses = await _service.GetAllAsync();
+            return stewardesses;
+        }
+
+        private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var list = (ListView)sender;
+            _selectedItem = (Stewardess)list.SelectedValue;
         }
     }
 }

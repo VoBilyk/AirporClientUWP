@@ -9,13 +9,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="MainGrid">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Rectangle Fill="DarkSlateGray" Opacity="0.1"  Grid.Column="0"/>
-        <ListView Grid.Column="0" ItemsSource="{x:Bind pilots}" SelectedItem="{x:Bind _selectedPilot, Mode=TwoWay}">
+        <ListView Grid.Column="0" x:Name="ItemList" ItemsSource="{x:Bind pilots}" SelectionChanged="ItemList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Pilot">
                     <Grid Margin="16">
@@ -58,8 +59,7 @@
         </ListView>
 
         <Rectangle Fill="Gray" Opacity="0.1"  Grid.Column="1"/>
-        <Grid Grid.Column="1"
-              Margin="10, 20, 0, 0">
+        <Grid x:Name="ItemDetail" Grid.Column="1" Margin="10, 20, 0, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -84,19 +84,19 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBlock Text="{x:Bind _selectedPilot.Id}"
+            <TextBlock Text="{x:Bind _selectedPilot.Id, Mode=OneTime}"
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
                        Padding=" 0,10"/>
-            
+
             <TextBlock Text="FirstName:"
                        Grid.Row="2"
                        Grid.Column="0"
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedPilot.FirstName}"
+            <TextBox Text="{x:Bind _selectedPilot.FirstName, Mode=TwoWay}"
                      Height="35"
                      Grid.Row="2"
                      Grid.Column="1"
@@ -108,7 +108,7 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedPilot.LastName}"
+            <TextBox Text="{x:Bind _selectedPilot.LastName, Mode=TwoWay}"
                      Grid.Row="3"
                      Grid.Column="1"
                      Height="35"
@@ -120,7 +120,7 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedPilot.Experience}"
+            <TextBox Text="{x:Bind _selectedPilot.Experience, Mode=TwoWay}"
                      Grid.Row="4"
                      Grid.Column="1"
                      Height="35"
