@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -95,10 +95,57 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Aeroplane.cs" />
+    <Compile Include="Models\AeroplaneType.cs" />
+    <Compile Include="Models\Crew.cs" />
+    <Compile Include="Models\Departure.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\Pilot.cs" />
+    <Compile Include="Models\Stewardess.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AeroplaneService.cs" />
+    <Compile Include="Services\AeroplaneTypeService.cs" />
+    <Compile Include="Services\CrewService.cs" />
+    <Compile Include="Services\DepartureService.cs" />
+    <Compile Include="Services\FlightService.cs" />
+    <Compile Include="Services\PilotService.cs" />
+    <Compile Include="Services\StewardessService.cs" />
+    <Compile Include="Services\TicketService.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\AeroplaneTypeViewModel.cs" />
+    <Compile Include="ViewModels\AeroplaneViewModel.cs" />
+    <Compile Include="ViewModels\CrewViewModel.cs" />
+    <Compile Include="ViewModels\DepartureViewModel.cs" />
+    <Compile Include="ViewModels\FlightViewModel.cs" />
+    <Compile Include="ViewModels\PilotViewModel.cs" />
+    <Compile Include="ViewModels\StewardessViewModel.cs" />
+    <Compile Include="ViewModels\TicketViewModel.cs" />
+    <Compile Include="Views\AeroplaneTypeView.xaml.cs">
+      <DependentUpon>AeroplaneTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AeroplaneView.xaml.cs">
+      <DependentUpon>AeroplaneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartureView.xaml.cs">
+      <DependentUpon>DepartureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightsView.xaml.cs">
+      <DependentUpon>FlightsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PilotsView.xaml.cs">
+      <DependentUpon>PilotsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StewardessView.xaml.cs">
+      <DependentUpon>StewardessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TicketView.xaml.cs">
+      <DependentUpon>TicketView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -125,10 +172,44 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AeroplaneTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AeroplaneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DepartureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PilotsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StewardessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TicketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmLight">
+      <Version>5.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
