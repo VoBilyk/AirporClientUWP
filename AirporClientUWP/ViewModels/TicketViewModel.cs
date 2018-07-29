@@ -9,28 +9,28 @@ using AirporClientUWP.Services;
 
 namespace AirporClientUWP.ViewModels
 {
-    public class PilotViewModel : ViewModelBase
+    public class TicketViewModel : ViewModelBase
     {
-        private PilotService _service;
-        private Pilot _selectedPilot;
+        private TicketService _service;
+        private Ticket _selectedTicket;
 
-        public ObservableCollection<Pilot> Pilots { get; private set; }
-        
-        public PilotViewModel()
+        public ObservableCollection<Ticket> Tickets { get; private set; }
+
+        public TicketViewModel()
         {
-            _service = new PilotService();
+            _service = new TicketService();
             DownloadData();
 
-            AddCommand = new RelayCommand(AddPilot);
-            UpdateCommand = new RelayCommand(UpdatePilot);
-            DeleteCommand = new RelayCommand(DeletePilot);
+            AddCommand = new RelayCommand(AddTicket);
+            UpdateCommand = new RelayCommand(UpdateTicket);
+            DeleteCommand = new RelayCommand(DeleteTicket);
         }
 
         private async Task DownloadData()
         {
             try
             {
-                Pilots = await _service.GetAllAsync();
+                Tickets = await _service.GetAllAsync();
             }
             catch (System.InvalidOperationException)
             {
@@ -39,24 +39,24 @@ namespace AirporClientUWP.ViewModels
         }
 
 
-        public Pilot SelectedPilot
+        public Ticket SelectedTicket
         {
-            get { return _selectedPilot; }
+            get { return _selectedTicket; }
             set
             {
-                _selectedPilot = value;
-                RaisePropertyChanged(() => SelectedPilot);
+                _selectedTicket = value;
+                RaisePropertyChanged(() => SelectedTicket);
             }
         }
 
         public ICommand AddCommand { get; set; }
 
-        private async void AddPilot()
+        private async void AddTicket()
         {
             try
             {
-                var result = await _service.AddAsync(SelectedPilot);
-                Pilots.Insert(0, result);
+                var result = await _service.AddAsync(SelectedTicket);
+                Tickets.Insert(0, result);
             }
             catch (System.InvalidOperationException)
             {
@@ -66,13 +66,13 @@ namespace AirporClientUWP.ViewModels
 
         public ICommand UpdateCommand { get; set; }
 
-        private async void UpdatePilot()
+        private async void UpdateTicket()
         {
             try
             {
-                var resultItem = await _service.UpdateAsync(SelectedPilot);
-                Pilots.Remove(SelectedPilot);
-                Pilots.Insert(0, resultItem);
+                var resultItem = await _service.UpdateAsync(SelectedTicket);
+                Tickets.Remove(SelectedTicket);
+                Tickets.Insert(0, resultItem);
             }
             catch (System.InvalidOperationException)
             {
@@ -82,12 +82,12 @@ namespace AirporClientUWP.ViewModels
 
         public ICommand DeleteCommand { get; set; }
 
-        private async void DeletePilot()
+        private async void DeleteTicket()
         {
             try
             {
-                await _service.DeleteAsync(SelectedPilot.Id);
-                Pilots.Remove(SelectedPilot);
+                await _service.DeleteAsync(SelectedTicket.Id);
+                Tickets.Remove(SelectedTicket);
             }
             catch (System.InvalidOperationException)
             {

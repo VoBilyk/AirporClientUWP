@@ -116,7 +116,14 @@
     <Compile Include="Services\StewardessService.cs" />
     <Compile Include="Services\TicketService.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\AeroplaneTypeViewModel.cs" />
+    <Compile Include="ViewModels\AeroplaneViewModel.cs" />
+    <Compile Include="ViewModels\CrewViewModel.cs" />
+    <Compile Include="ViewModels\DepartureViewModel.cs" />
+    <Compile Include="ViewModels\FlightViewModel.cs" />
     <Compile Include="ViewModels\PilotViewModel.cs" />
+    <Compile Include="ViewModels\StewardessViewModel.cs" />
+    <Compile Include="ViewModels\TicketViewModel.cs" />
     <Compile Include="Views\PilotsView.xaml.cs">
       <DependentUpon>PilotsView.xaml</DependentUpon>
     </Compile>
