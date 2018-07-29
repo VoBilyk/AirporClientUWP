@@ -45,5 +45,19 @@ namespace AirporClientUWP.Services
             throw new InvalidOperationException("Can`t get items");
         }
 
+        public async Task AddAsync(Pilot pilot)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                await httpClient.PostAsync(SERVER_NAME + $"/api/pilots/").ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string contentResponse = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Pilot>(contentResponse);
+                }
+            }
+        }
+
     }
 }

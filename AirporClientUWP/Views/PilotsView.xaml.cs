@@ -10,30 +10,30 @@ namespace AirporClientUWP.Views
 {
     public sealed partial class PilotsView : Page
     {
-        private PilotService _service;
+        //private PilotService _service;
 
-        private Pilot _selectedPilot;
-        public ObservableCollection<Pilot> pilots;
+        //private Pilot _selectedPilot;
+        //public ObservableCollection<Pilot> pilots;
         
         public PilotsView()
         {
             this.InitializeComponent();
-            _service = new PilotService();
-            pilots = _service.GetAllAsync().Result;
-            _selectedPilot = pilots[1];
+            //_service = new PilotService();
+            //pilots = _service.GetAllAsync().Result;
+            //_selectedPilot = pilots[1];
         }
 
-        public async Task<ObservableCollection<Pilot>> GetPilots()
-        {
-            var service = new PilotService();
-            pilots = await service.GetAllAsync();
-            return pilots;
-        }
+        //public async Task<ObservableCollection<Pilot>> GetPilots()
+        //{
+        //    var service = new PilotService();
+        //    pilots = await service.GetAllAsync();
+        //    return pilots;
+        //}
 
-        private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var list = (ListView)sender;
-            _selectedPilot = (Pilot)list.SelectedValue;
-        }
+        //private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var list = (ListView)sender;
+        //    _selectedPilot = (Pilot)list.SelectedValue;
+        //}
     }
 }

@@ -7,8 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding PilotVMInstance, Source={StaticResource Locator}}">
+    
     <Grid x:Name="MainGrid">
 
         <Grid.ColumnDefinitions>
@@ -16,7 +17,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Rectangle Fill="DarkSlateGray" Opacity="0.1"  Grid.Column="0"/>
-        <ListView Grid.Column="0" x:Name="ItemList" ItemsSource="{x:Bind pilots}" SelectionChanged="ItemList_SelectionChanged">
+        <ListView Grid.Column="0" x:Name="ItemList" ItemsSource="{Binding Pilots}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:Pilot">
                     <Grid Margin="16">
@@ -84,7 +85,7 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBlock Text="{x:Bind _selectedPilot.Id, Mode=OneTime}"
+            <TextBlock Text="{Binding SelectedPilot.Id, Mode=OneWay}"
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
@@ -96,7 +97,7 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedPilot.FirstName, Mode=TwoWay}"
+            <TextBox Text="{Binding SelectedPilot.FirstName, Mode=TwoWay}"
                      Height="35"
                      Grid.Row="2"
                      Grid.Column="1"
@@ -108,7 +109,7 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedPilot.LastName, Mode=TwoWay}"
+            <TextBox Text="{Binding SelectedPilot.LastName, Mode=TwoWay}"
                      Grid.Row="3"
                      Grid.Column="1"
                      Height="35"
@@ -120,7 +121,7 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <TextBox Text="{x:Bind _selectedPilot.Experience, Mode=TwoWay}"
+            <TextBox Text="{Binding SelectedPilot.Experience, Mode=TwoWay}"
                      Grid.Row="4"
                      Grid.Column="1"
                      Height="35"
@@ -132,14 +133,14 @@
                        FontSize="20"
                        Padding="10"
                        HorizontalAlignment="Right"/>
-            <DatePicker Date="{x:Bind _selectedPilot.BirthDate}"
+            <DatePicker Date="{Binding SelectedPilot.BirthDate}"
                      Grid.Row="5"
                      Grid.Column="1"
                      Height="35"
                      FontSize="17"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
-                <Button Width="80" Margin="5, 0">Create</Button>
+                <Button Content="Create" Width="80" Margin="5, 0" Command="{Binding AddCommand}"/>
                 <Button Width="80" Margin="5, 0">Update</Button>
                 <Button Width="80" Margin="5, 0">Delete</Button>
             </StackPanel>

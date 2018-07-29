@@ -103,6 +103,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PilotService.cs" />
     <Compile Include="Services\StewardessService.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\PilotViewModel.cs" />
     <Compile Include="Views\PilotsView.xaml.cs">
       <DependentUpon>PilotsView.xaml</DependentUpon>
     </Compile>
