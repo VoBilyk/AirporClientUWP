@@ -15,6 +15,8 @@ namespace AirporClientUWP.ViewModels
         private AeroplaneType _selectedAeroplaneType;
         private ObservableCollection<AeroplaneType> _AeroplaneTypes;
 
+        public bool DetailVisible { get; set; } = false;
+        
 
         public AeroplaneTypeViewModel()
         {
@@ -56,6 +58,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedAeroplaneType = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedAeroplaneType);
             }
         }

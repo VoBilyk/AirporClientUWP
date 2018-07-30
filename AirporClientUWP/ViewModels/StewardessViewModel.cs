@@ -14,7 +14,8 @@ namespace AirporClientUWP.ViewModels
         private StewardessService _service;
         private Stewardess _selectedStewardess;
         private ObservableCollection<Stewardess> _stewardesses;
-        
+        public bool DetailVisible { get; set; } = false;
+
 
         public StewardessViewModel()
         {
@@ -33,6 +34,7 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _stewardesses = value;
+
                 RaisePropertyChanged(() => Stewardesses);
             }
         }
@@ -56,6 +58,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedStewardess = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedStewardess);
             }
         }

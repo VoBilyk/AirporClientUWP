@@ -74,7 +74,7 @@
 
                         <StackPanel Orientation="Horizontal"
                                         Grid.Row="1">
-                            <TextBlock Text="Lifetime:"
+                            <TextBlock Text="Lifetime(hours):"
                                        Foreground="#888888"
                                        FontSize="13"
                                        Padding="20,5,0,0"/>
@@ -88,7 +88,8 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0"
+              Visibility="{Binding DetailVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -112,7 +113,7 @@
                        Grid.Row="1" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource DataTitle}" 
-                       Text="Lifetime:"
+                       Text="Lifetime(hours):"
                        Grid.Row="2" Grid.Column="0"/>
             <TextBox Style="{StaticResource TwoWayInput}" 
                      Text="{Binding SelectedAeroplane.Lifetime, Mode=TwoWay}"

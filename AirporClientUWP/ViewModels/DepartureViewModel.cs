@@ -15,6 +15,7 @@ namespace AirporClientUWP.ViewModels
         private Departure _selectedDeparture;
         private ObservableCollection<Departure> _Departures;
 
+        public bool DetailVisible { get; set; } = false;
 
         public DepartureViewModel()
         {
@@ -56,6 +57,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedDeparture = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedDeparture);
             }
         }

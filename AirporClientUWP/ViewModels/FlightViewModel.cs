@@ -14,6 +14,7 @@ namespace AirporClientUWP.ViewModels
         private FlightService _service;
         private Flight _selectedFlight;
         private ObservableCollection<Flight> _Flights;
+        public bool DetailVisible { get; set; } = false;
 
 
         public FlightViewModel()
@@ -56,6 +57,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedFlight = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedFlight);
             }
         }

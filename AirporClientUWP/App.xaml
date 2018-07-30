@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <local:ViewModelLocator x:Key="Locator" />
             <Converters:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
             <Style TargetType="Button" x:Name="ButtonCommand">
                 <Setter Property="Width" Value="80"></Setter>

@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="Models\Aeroplane.cs" />
     <Compile Include="Models\AeroplaneType.cs" />
@@ -127,6 +128,9 @@
     </Compile>
     <Compile Include="Views\AeroplaneView.xaml.cs">
       <DependentUpon>AeroplaneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CrewView.xaml.cs">
+      <DependentUpon>CrewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartureView.xaml.cs">
       <DependentUpon>DepartureView.xaml</DependentUpon>
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AeroplaneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CrewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

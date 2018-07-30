@@ -7,7 +7,7 @@ namespace AirporClientUWP.Views
         public MainPageView()
         {
             this.InitializeComponent();
-            contentFrame.Navigate(typeof(PilotsView));
+            contentFrame.Navigate(typeof(FlightsView));
         }
 
         private void SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -17,34 +17,42 @@ namespace AirporClientUWP.Views
             switch (item.Tag)
             {
                 case "Pilots":
+                    Menu.Header = "Pilots";
                     contentFrame.Navigate(typeof(PilotsView));
                     break;
 
                 case "Stewardesses":
+                    Menu.Header = "Stewardesses";
                     contentFrame.Navigate(typeof(StewardessView));
                     break;
 
                 case "Crews":
-                    contentFrame.Navigate(typeof(DepartureView));
+                    Menu.Header = "Crews";
+                    contentFrame.Navigate(typeof(CrewView));
                     break;
 
                 case "Tickets":
+                    Menu.Header = "Tickets";
                     contentFrame.Navigate(typeof(TicketView));
                     break;
 
                 case "Flights":
+                    Menu.Header = "Flights";
                     contentFrame.Navigate(typeof(FlightsView));
                     break;
 
                 case "Aeroplanes":
+                    Menu.Header = "Aeroplanes";
                     contentFrame.Navigate(typeof(AeroplaneView));
                     break;
 
                 case "AeroplaneTypes":
+                    Menu.Header = "Aeroplane Types";
                     contentFrame.Navigate(typeof(AeroplaneTypeView));
                     break;
 
                 case "Departures":
+                    Menu.Header = "Departures";
                     contentFrame.Navigate(typeof(DepartureView));
                     break;
             }

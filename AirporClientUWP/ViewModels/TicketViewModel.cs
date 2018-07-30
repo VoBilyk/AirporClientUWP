@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -14,6 +15,7 @@ namespace AirporClientUWP.ViewModels
         private TicketService _service;
         private Ticket _selectedTicket;
         private ObservableCollection<Ticket> _Tickets;
+        public bool DetailVisible { get; set; } = false;
 
 
         public TicketViewModel()
@@ -41,7 +43,17 @@ namespace AirporClientUWP.ViewModels
         {
             try
             {
-                Tickets = await _service.GetAllAsync();
+                var tickets = await _service.GetAllAsync();
+
+                var _flightService = new FlightService();
+                var flight = await _flightService.GetAllAsync();
+                foreach (var ticket in tickets)
+                {
+                    ticket.Flight = flight.SingleOrDefault(x => x.Id == ticket.FlightId);
+                }
+                flight.Clear();
+
+                Tickets = tickets;
             }
             catch (System.InvalidOperationException)
             {
@@ -56,6 +68,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedTicket = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedTicket);
             }
         }
@@ -67,6 +82,7 @@ namespace AirporClientUWP.ViewModels
             try
             {
                 var result = await _service.AddAsync(SelectedTicket);
+                result.Flight = await new FlightService().GetAsync(result.FlightId);
                 Tickets.Insert(0, result);
             }
             catch (System.InvalidOperationException)
@@ -81,9 +97,11 @@ namespace AirporClientUWP.ViewModels
         {
             try
             {
-                var resultItem = await _service.UpdateAsync(SelectedTicket);
+                var result = await _service.UpdateAsync(SelectedTicket);
+                result.Flight = await new FlightService().GetAsync(result.FlightId);
+
                 Tickets.Remove(SelectedTicket);
-                Tickets.Insert(0, resultItem);
+                Tickets.Insert(0, result);
             }
             catch (System.InvalidOperationException)
             {

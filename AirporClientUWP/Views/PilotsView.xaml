@@ -81,7 +81,7 @@
 
                         <StackPanel Orientation="Horizontal"
                                         Grid.Row="1">
-                            <TextBlock Text="{Binding BirthDate.ToShortDateString()}"
+                            <TextBlock Text="{x:Bind BirthDate.ToShortDateString()}"
                                        Foreground="#444444"
                                        FontSize="13"
                                        Width="110"
@@ -100,7 +100,8 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0"
+              Visibility="{Binding DetailVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>

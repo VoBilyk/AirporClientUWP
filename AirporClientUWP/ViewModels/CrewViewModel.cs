@@ -14,6 +14,7 @@ namespace AirporClientUWP.ViewModels
         private CrewService _service;
         private Crew _selectedCrew;
         private ObservableCollection<Crew> _Crews;
+        public bool DetailVisible { get; set; } = false;
 
 
         public CrewViewModel()
@@ -56,6 +57,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedCrew = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedCrew);
             }
         }

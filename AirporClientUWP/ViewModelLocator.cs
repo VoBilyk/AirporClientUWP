@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
-using AirporClientUWP.ViewModels;
 using CommonServiceLocator;
+using AirporClientUWP.ViewModels;
+
 
 namespace AirporClientUWP
 {
@@ -10,13 +10,7 @@ namespace AirporClientUWP
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            var navigationService = new NavigationService();
-            //navigationService.Configure(nameof(AcademyViewModel), typeof(AcademyView));
-            //navigationService.Configure(nameof(StudentViewModel), typeof(StudentView));
-
-            //Register your services used here
-            SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+            
             SimpleIoc.Default.Register<PilotViewModel>();
             SimpleIoc.Default.Register<StewardessViewModel>();
             SimpleIoc.Default.Register<CrewViewModel>();
@@ -25,8 +19,6 @@ namespace AirporClientUWP
             SimpleIoc.Default.Register<AeroplaneTypeViewModel>();
             SimpleIoc.Default.Register<AeroplaneViewModel>();
             SimpleIoc.Default.Register<TicketViewModel>();
-
-            //ServiceLocator.Current.GetInstance<StudentViewModel>();
         }
 
         public PilotViewModel PilotVMInstance => ServiceLocator.Current.GetInstance<PilotViewModel>();

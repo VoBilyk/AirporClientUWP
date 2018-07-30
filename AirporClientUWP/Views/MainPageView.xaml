@@ -9,20 +9,21 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <NavigationView Grid.Row="1" SelectionChanged="SelectionChanged"
+                    x:Name="Menu"
                     IsSettingsVisible="False"
-                    IsBackButtonVisible="Collapsed">
-        
+                    IsBackButtonVisible="Collapsed"
+                    Header="Main Page">
         <NavigationView.MenuItems>
-            <NavigationViewItem Icon="Play" Content="Aeroplanes" Tag="Aeroplanes" />
-            <NavigationViewItem Content="AeroplaneTypes" Tag="AeroplaneTypes" />
+            <NavigationViewItem Icon="SolidStar" Content="Aeroplanes" Tag="Aeroplanes" />
+            <NavigationViewItem Icon="SolidStar" Content="Aeroplane Types" Tag="AeroplaneTypes" />
             <NavigationViewItemSeparator/>
-            <NavigationViewItem Icon="Play" Content="Departures" Tag="Departures" />
-            <NavigationViewItem Icon="Play" Content="Flights" Tag="Flights" />
-            <NavigationViewItem Icon="Play" Content="Tickets" Tag="Tickets" />
+            <NavigationViewItem Icon="SolidStar" Content="Departures" Tag="Departures" />
+            <NavigationViewItem Icon="SolidStar" Content="Flights" Tag="Flights" />
+            <NavigationViewItem Icon="SolidStar" Content="Tickets" Tag="Tickets" />
             <NavigationViewItemSeparator/>
-            <NavigationViewItem Icon="Play" Content="Pilots" Tag="Pilots" />
-            <NavigationViewItem Icon="Play" Content="Stewardesses" Tag="Stewardesses" />
-            <NavigationViewItem Icon="Play" Content="Crews" Tag="Crews" />
+            <NavigationViewItem Icon="SolidStar" Content="Pilots" Tag="Pilots" />
+            <NavigationViewItem Icon="SolidStar" Content="Stewardesses" Tag="Stewardesses" />
+            <NavigationViewItem Icon="SolidStar" Content="Crews" Tag="Crews" />
         </NavigationView.MenuItems>
         <Frame x:Name="contentFrame">
         </Frame>
