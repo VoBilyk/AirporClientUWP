@@ -108,7 +108,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Ticket Information"
+            <TextBlock Text="Crew Information"
                        Style="{StaticResource TableTitle}"
                        Grid.Row="0" Grid.ColumnSpan="2"/>
 
