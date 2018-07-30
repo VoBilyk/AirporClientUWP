@@ -13,17 +13,29 @@ namespace AirporClientUWP.ViewModels
     {
         private FlightService _service;
         private Flight _selectedFlight;
+        private ObservableCollection<Flight> _Flights;
+        public bool DetailVisible { get; set; } = false;
 
-        public ObservableCollection<Flight> Flights { get; private set; }
 
         public FlightViewModel()
         {
             _service = new FlightService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddFlight);
             UpdateCommand = new RelayCommand(UpdateFlight);
             DeleteCommand = new RelayCommand(DeleteFlight);
+
+            DownloadData();
+        }
+
+        public ObservableCollection<Flight> Flights
+        {
+            get { return _Flights; }
+            set
+            {
+                _Flights = value;
+                RaisePropertyChanged(() => Flights);
+            }
         }
 
         private async Task DownloadData()
@@ -45,6 +57,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedFlight = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedFlight);
             }
         }

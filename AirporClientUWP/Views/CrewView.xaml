@@ -1,14 +1,15 @@
 ﻿<Page
-    x:Class="AirporClientUWP.Views.StewardessView"
+    x:Class="AirporClientUWP.Views.CrewView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AirporClientUWP.Views"
     xmlns:m="using:AirporClientUWP.Models"
+    xmlns:s="using:System"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    DataContext="{Binding StewardessVMInstance, Source={StaticResource Locator}}">
+    DataContext="{Binding CrewVMInstance, Source={StaticResource Locator}}">
 
     <Grid x:Name="MainGrid">
         <VisualStateManager.VisualStateGroups>
@@ -55,12 +56,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ListItem" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Stewardesses}" SelectedItem="{Binding SelectedStewardess, Mode=TwoWay}">
+        <ListView x:Name="ListItem" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Crews}" SelectedItem="{Binding SelectedCrew, Mode=TwoWay}">
             <ListView.Background>
                 <SolidColorBrush Color="DarkSlateGray" Opacity="0.1" />
             </ListView.Background>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="m:Stewardess">
+                <DataTemplate x:DataType="m:Crew">
                     <Grid Margin="16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="24"/>
@@ -69,30 +70,31 @@
 
                         <StackPanel Orientation="Horizontal"
                                     Grid.Row="0">
-                            <TextBlock Text="{x:Bind FirstName}"
+                            <TextBlock Text="Pilot:"
+                                       FontSize="18"
+                                       Padding="10,0,0,0"/>
+                            <TextBlock Text="{Binding PilotId}"
                                        FontSize="20"
-                                       Padding="10,0,0,0"
-                                       Grid.Row="0"/>
-                            <TextBlock Text="{x:Bind LastName}"
-                                       FontSize="20"
-                                       Padding="5,0,0,0"
-                                       Grid.Row="0"/>
+                                       Padding="5,0,0,0"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
                                         Grid.Row="1">
-                            <TextBlock Text="{x:Bind BirthDate.ToShortDateString()}"
+                            <TextBlock Text="Stewardess:"
+                                       Foreground="#888888"
+                                       FontSize="13"
+                                       Padding="20,5,0,0"/>
+                            <TextBlock Text="{Binding StewardessesId.Count}"
                                        Foreground="#444444"
                                        FontSize="13"
-                                       Width="110"
-                                       Padding="10,5,0,0"/>
+                                       Padding="6,5,0,0"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0"
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0" 
               Visibility="{Binding DetailVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -106,37 +108,30 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Stewardess Information"
+            <TextBlock Text="Crew Information"
                        Style="{StaticResource TableTitle}"
                        Grid.Row="0" Grid.ColumnSpan="2"/>
 
             <TextBlock Text="ID:"
                        Style="{StaticResource DataTitle}"
                        Grid.Row="1" Grid.Column="0"/>
-            <TextBlock Text="{Binding SelectedStewardess.Id, Mode=OneWay}"
+            <TextBlock Text="{Binding SelectedCrew.Id, Mode=OneWay}"
                        Style="{StaticResource Id}"
                        Grid.Row="1" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource DataTitle}" 
-                       Text="FirstName:"
+                       Text="Pilot:"
                        Grid.Row="2" Grid.Column="0"/>
             <TextBox Style="{StaticResource TwoWayInput}" 
-                     Text="{Binding SelectedStewardess.FirstName, Mode=TwoWay}"
+                     Text="{Binding SelectedCrew.PilotId, Mode=TwoWay}"
                      Grid.Row="2" Grid.Column="1"/>
 
-            <TextBlock Text="LastName:" 
+            <TextBlock Text="Stewardesses:" 
                        Style="{StaticResource DataTitle}"
                        Grid.Row="3" Grid.Column="0"/>
-            <TextBox Style="{StaticResource TwoWayInput}" 
-                     Text="{Binding SelectedStewardess.LastName, Mode=TwoWay}"
-                     Grid.Row="3" Grid.Column="1"/>
 
-            <TextBlock Text="BirthDate:" Style="{StaticResource DataTitle}"
-                       Grid.Row="4" Grid.Column="0"/>
-
-            <DatePicker Date="{Binding SelectedStewardess.BirthDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}"
-                        Style="{StaticResource InputDateTwoWay}"
-                        Grid.Row="4" Grid.Column="1"/>
+            <ListView ItemsSource="{Binding SelectedCrew.StewardessesId, Mode=TwoWay}"
+                      Grid.Row="3" Grid.Column="1"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
                 <Button Style="{StaticResource ButtonCommand}" Content="Create" Command="{Binding AddCommand}"/>

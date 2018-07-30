@@ -97,7 +97,8 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0"
+              Visibility="{Binding DetailVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>

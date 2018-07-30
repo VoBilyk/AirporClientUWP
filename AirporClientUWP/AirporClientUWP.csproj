@@ -95,10 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Aeroplane.cs" />
     <Compile Include="Models\AeroplaneType.cs" />
     <Compile Include="Models\Crew.cs" />
@@ -131,11 +129,17 @@
     <Compile Include="Views\AeroplaneView.xaml.cs">
       <DependentUpon>AeroplaneView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CrewView.xaml.cs">
+      <DependentUpon>CrewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DepartureView.xaml.cs">
       <DependentUpon>DepartureView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FlightsView.xaml.cs">
       <DependentUpon>FlightsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPageView.xaml.cs">
+      <DependentUpon>MainPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PilotsView.xaml.cs">
       <DependentUpon>PilotsView.xaml</DependentUpon>
@@ -168,10 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\AeroplaneTypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,11 +180,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CrewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DepartureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FlightsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

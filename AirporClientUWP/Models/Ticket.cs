@@ -13,5 +13,7 @@ namespace AirporClientUWP.Models
         public decimal Price { get; set; }
 
         public Guid FlightId { get; set; }
+
+        public Flight Flight { get; set; }
     }
 }

@@ -73,7 +73,7 @@
                                        FontSize="20"
                                        Padding="10,0,0,0"
                                        Grid.Row="0"/>
-                            <TextBlock Text="{Binding FlightId}"
+                            <TextBlock Text="{Binding Flight.Name}"
                                        FontSize="20"
                                        Padding="5,0,0,0"
                                        Grid.Row="0"/>
@@ -95,7 +95,8 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0" 
+              Visibility="{Binding DetailVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>

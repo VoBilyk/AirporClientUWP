@@ -13,17 +13,30 @@ namespace AirporClientUWP.ViewModels
     {
         private AeroplaneTypeService _service;
         private AeroplaneType _selectedAeroplaneType;
+        private ObservableCollection<AeroplaneType> _AeroplaneTypes;
 
-        public ObservableCollection<AeroplaneType> AeroplaneTypes { get; private set; }
+        public bool DetailVisible { get; set; } = false;
+        
 
         public AeroplaneTypeViewModel()
         {
             _service = new AeroplaneTypeService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddAeroplaneType);
             UpdateCommand = new RelayCommand(UpdateAeroplaneType);
             DeleteCommand = new RelayCommand(DeleteAeroplaneType);
+
+            DownloadData();
+        }
+
+        public ObservableCollection<AeroplaneType> AeroplaneTypes
+        {
+            get { return _AeroplaneTypes; }
+            set
+            {
+                _AeroplaneTypes = value;
+                RaisePropertyChanged(() => AeroplaneTypes);
+            }
         }
 
         private async Task DownloadData()
@@ -45,6 +58,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedAeroplaneType = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedAeroplaneType);
             }
         }

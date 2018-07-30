@@ -13,17 +13,29 @@ namespace AirporClientUWP.ViewModels
     {
         private CrewService _service;
         private Crew _selectedCrew;
+        private ObservableCollection<Crew> _Crews;
+        public bool DetailVisible { get; set; } = false;
 
-        public ObservableCollection<Crew> Crews { get; private set; }
 
         public CrewViewModel()
         {
             _service = new CrewService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddCrew);
             UpdateCommand = new RelayCommand(UpdateCrew);
             DeleteCommand = new RelayCommand(DeleteCrew);
+
+            DownloadData();
+        }
+
+        public ObservableCollection<Crew> Crews
+        {
+            get { return _Crews; }
+            set
+            {
+                _Crews = value;
+                RaisePropertyChanged(() => Crews);
+            }
         }
 
         private async Task DownloadData()
@@ -45,6 +57,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedCrew = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedCrew);
             }
         }

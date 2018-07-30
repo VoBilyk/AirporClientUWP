@@ -13,17 +13,30 @@ namespace AirporClientUWP.ViewModels
     {
         private StewardessService _service;
         private Stewardess _selectedStewardess;
+        private ObservableCollection<Stewardess> _stewardesses;
+        public bool DetailVisible { get; set; } = false;
 
-        public ObservableCollection<Stewardess> Stewardesses { get; private set; }
 
         public StewardessViewModel()
         {
             _service = new StewardessService();
-            DownloadData();
 
             AddCommand = new RelayCommand(AddStewardess);
             UpdateCommand = new RelayCommand(UpdateStewardess);
             DeleteCommand = new RelayCommand(DeleteStewardess);
+
+            DownloadData();
+        }
+
+        public ObservableCollection<Stewardess> Stewardesses
+        {
+            get { return _stewardesses; }
+            set
+            {
+                _stewardesses = value;
+
+                RaisePropertyChanged(() => Stewardesses);
+            }
         }
 
         private async Task DownloadData()
@@ -45,6 +58,9 @@ namespace AirporClientUWP.ViewModels
             set
             {
                 _selectedStewardess = value;
+                DetailVisible = true;
+
+                RaisePropertyChanged(() => DetailVisible);
                 RaisePropertyChanged(() => SelectedStewardess);
             }
         }

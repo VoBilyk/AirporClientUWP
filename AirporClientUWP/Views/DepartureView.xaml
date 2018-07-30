@@ -64,26 +64,27 @@
                     <Grid Margin="16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Row="0">
-                            <TextBlock Text="Time:"
-                                       FontSize="20"
+                        <TextBlock Text="{x:Bind Time.ToShortDateString()}"
+                                       FontSize="18"
                                        Padding="10,0,0,0"
                                        Grid.Row="0"/>
-                            <TextBlock Text="{Binding Time}"
-                                       FontSize="20"
-                                       Padding="5,0,0,0"
-                                       Grid.Row="0"/>
-                        </StackPanel>
+
+                        <TextBlock Text="{x:Bind Time.ToLongTimeString()}"
+                                   Grid.Row="1"
+                                       Foreground="#444444"
+                                       FontSize="13"
+                                       Padding="10,5,0,0"/>
 
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0">
+        <Grid x:Name="DetailItem" Grid.Column="1" Grid.Row="0" 
+              Visibility="{Binding DetailVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
