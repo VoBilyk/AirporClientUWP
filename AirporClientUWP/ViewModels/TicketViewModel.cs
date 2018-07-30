@@ -4,22 +4,27 @@ using System.Threading.Tasks;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 
 using AirporClientUWP.Models;
 using AirporClientUWP.Services;
+
 
 namespace AirporClientUWP.ViewModels
 {
     public class TicketViewModel : ViewModelBase
     {
         private TicketService _service;
+        private readonly IDialogService _dialogService;
+
         private Ticket _selectedTicket;
         private ObservableCollection<Ticket> _Tickets;
         public bool DetailVisible { get; set; } = false;
 
 
-        public TicketViewModel()
+        public TicketViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
             _service = new TicketService();
 
             AddCommand = new RelayCommand(AddTicket);
@@ -55,9 +60,9 @@ namespace AirporClientUWP.ViewModels
 
                 Tickets = tickets;
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
 
@@ -85,9 +90,9 @@ namespace AirporClientUWP.ViewModels
                 result.Flight = await new FlightService().GetAsync(result.FlightId);
                 Tickets.Insert(0, result);
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
 
@@ -103,9 +108,9 @@ namespace AirporClientUWP.ViewModels
                 Tickets.Remove(SelectedTicket);
                 Tickets.Insert(0, result);
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
 
@@ -118,9 +123,9 @@ namespace AirporClientUWP.ViewModels
                 await _service.DeleteAsync(SelectedTicket.Id);
                 Tickets.Remove(SelectedTicket);
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
     }

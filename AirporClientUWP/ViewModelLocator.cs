@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using CommonServiceLocator;
+//using MvvmDialogs;
 using AirporClientUWP.ViewModels;
 
 
@@ -10,7 +12,9 @@ namespace AirporClientUWP
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            
+
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
+
             SimpleIoc.Default.Register<PilotViewModel>();
             SimpleIoc.Default.Register<StewardessViewModel>();
             SimpleIoc.Default.Register<CrewViewModel>();
@@ -19,6 +23,7 @@ namespace AirporClientUWP
             SimpleIoc.Default.Register<AeroplaneTypeViewModel>();
             SimpleIoc.Default.Register<AeroplaneViewModel>();
             SimpleIoc.Default.Register<TicketViewModel>();
+
         }
 
         public PilotViewModel PilotVMInstance => ServiceLocator.Current.GetInstance<PilotViewModel>();
