@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using AirporClientUWP.Views;
+using Windows.UI.Popups;
 
 namespace AirporClientUWP
 {
@@ -31,11 +32,11 @@ namespace AirporClientUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            App.Current.UnhandledException += OnUnhandledException;
+            App.Current.UnhandledException += OnUnhandledExceptionAsync;
         }
 
 
-        private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        private void OnUnhandledExceptionAsync(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
         }
 

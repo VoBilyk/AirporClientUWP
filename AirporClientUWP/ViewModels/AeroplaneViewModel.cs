@@ -3,22 +3,27 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 
 using AirporClientUWP.Models;
 using AirporClientUWP.Services;
+
 
 namespace AirporClientUWP.ViewModels
 {
     public class AeroplaneViewModel : ViewModelBase
     {
         private AeroplaneService _service;
+        private readonly IDialogService _dialogService;
+
         private Aeroplane _selectedAeroplane;
         private ObservableCollection<Aeroplane> _Aeroplanes;
 
         public bool DetailVisible { get; set; } = false;
         
-        public AeroplaneViewModel()
+        public AeroplaneViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
             _service = new AeroplaneService();
 
             AddCommand = new RelayCommand(AddAeroplane);
@@ -44,9 +49,9 @@ namespace AirporClientUWP.ViewModels
             {
                 Aeroplanes = await _service.GetAllAsync();
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
 
@@ -73,9 +78,9 @@ namespace AirporClientUWP.ViewModels
                 var result = await _service.AddAsync(SelectedAeroplane);
                 Aeroplanes.Insert(0, result);
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
 
@@ -89,9 +94,9 @@ namespace AirporClientUWP.ViewModels
                 Aeroplanes.Remove(SelectedAeroplane);
                 Aeroplanes.Insert(0, resultItem);
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
 
@@ -104,9 +109,9 @@ namespace AirporClientUWP.ViewModels
                 await _service.DeleteAsync(SelectedAeroplane.Id);
                 Aeroplanes.Remove(SelectedAeroplane);
             }
-            catch (System.InvalidOperationException)
+            catch (System.InvalidOperationException ex)
             {
-                throw;
+                await _dialogService.ShowMessage(ex.Message, "Error");
             }
         }
     }
